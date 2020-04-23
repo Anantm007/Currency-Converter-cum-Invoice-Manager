@@ -38,18 +38,23 @@ app.post('/convert', async(req, res) => {
         toCurrency = 'EUR';
         query = fromCurrency + '_' + toCurrency;
 
-        await convertCurrency(apiKey, amount, query, function(err, total) {
-            eur = total
-        });
+        await convertCurrency(apiKey, amount, query, function(err, total) {   
+            eur = total;
     
-        toCurrency = 'INR';
-        query = fromCurrency + '_' + toCurrency;
+            toCurrency = 'INR';
+            query = fromCurrency + '_' + toCurrency;
 
-        await convertCurrency(apiKey, amount, query, function(err, total) {
-            inr = total
+            convertCurrency(apiKey, amount, query, function(err, total) {
+                inr = total;        
+                return res.json({
+                    usd: amount,
+                    inr,
+                    eur
+                })
+        
+            });
+
         });
-
-        usd = amount;
     }
 
     else if(fromCurrency === 'EUR')
@@ -68,46 +73,39 @@ app.post('/convert', async(req, res) => {
                 inr = total;        
                 return res.json({
                     usd,
-                    inr
+                    inr,
+                    eur: amount
                 })
         
             });
 
         });
-    
-        
-        
-        eur = amount;
     }
 
     else if(fromCurrency === 'INR')
     {
-
         toCurrency = 'USD';
         query = fromCurrency + '_' + toCurrency;
 
-        await convertCurrency(apiKey, amount, query, function(err, total) {
-            usd = total
-        });
+        await convertCurrency(apiKey, amount, query, function(err, total) {   
+            usd = total;
     
-        toCurrency = 'EUR';
-        query = fromCurrency + '_' + toCurrency;
+            toCurrency = 'EUR';
+            query = fromCurrency + '_' + toCurrency;
 
-        await convertCurrency(apiKey, amount, query, function(err, total) {
-            eur = total
+            convertCurrency(apiKey, amount, query, function(err, total) {
+                eur = total;        
+                return res.json({
+                    usd,
+                    inr: amount,
+                    eur
+                })
+        
+            });
+
         });
-
-        inr = amount;        
     }
 
-    // return res.json({
-    //     success: true,
-    //     inr,
-    //     eur,
-    //     usd
-    // })
-
-    
 })
 
 convertCurrency = (apiKey, amount, query, cb) => {
@@ -142,10 +140,10 @@ convertCurrency = (apiKey, amount, query, cb) => {
     });
 
 
-}).on('error', function(e){
-      console.log("Got an error: ", e);
-      cb(e);
-});
+    }).on('error', function(e){
+        console.log("Got an error: ", e);
+        cb(e);
+    });
 }
 
 
