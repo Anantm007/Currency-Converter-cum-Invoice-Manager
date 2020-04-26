@@ -150,3 +150,5 @@ convertCurrency = (apiKey, amount, query, cb) => {
 app.listen(3000, async(req, res) => {
     console.log('Server running on PORT 3000')
 })
+
+// 
