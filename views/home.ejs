@@ -4,19 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency Converter</title>
+
+    <!-- Bootstrap-Files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-    <h1>Currency Converter</h1>
-    <form action="/convert" method="POST">
-        <input type="number" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
-        <br/><br/>FROM &nbsp;
-        <select id="fromCurrency" name="fromCurrency">
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="INT">INR</option>
-          </select>
-          <br/><br/>
-          <button type="submit">CONVERT</button>
-    </form>
+    <div class="text-center" >
+    <div class="card">
+        <div class="card-header">
+            <h1 class="display-4">Currency Converter</h1>
+        </div>
+        <div class="card-body">
+            <form action="/convert" method="POST">
+            <input type="number" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
+            <br/><br/>
+            From : 
+                <select class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="btn-dropdown"
+                    name="fromCurrency" id="fromCurrency">
+                    USD
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <option class="dropdown-item" value="USD">USD</option>
+                        <option class="dropdown-item" value="EUR">EUR</option>
+                        <option class="dropdown-item" value="INT">INR</option>
+                    </div>            
+                </select>
+            <br/><br/>
+            <button class="btn btn-info" type="submit" id="btn-submit">CONVERT</button>
+        </form>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // input = document.getElementById("amount");
+        // input.addEventListener("mousewheel", function(event){ this.blur() });
+
+        $(document).on("wheel", "input[type=number]", function (e) {
+            $(this).blur();
+        });
+    </script>
 </body>
 </html>
