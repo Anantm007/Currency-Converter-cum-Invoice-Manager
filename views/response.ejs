@@ -19,38 +19,16 @@
         <div class="card-header">
             <h1 class="display-4"><a href="/" style="color: lightblue;">Currency Converter</a></h1>
         </div>
-        <div class="card-body">
-            <form action="/convert" method="POST">
-            <input type="number" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
-            <br/><br/>
-            From : 
-                <select class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="btn-dropdown"
-                    name="fromCurrency" id="fromCurrency">
-                    USD
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <option class="dropdown-item" value="USD">USD</option>
-                        <option class="dropdown-item" value="EUR">EUR</option>
-                        <option class="dropdown-item" value="INR">INR</option>
-                    </div>            
-                </select>
-            <br/><br/>
-            <button class="btn btn-info" type="submit" id="btn-submit">CONVERT</button>
-        </form>
+        <div class="card-body" style="text-align: left; margin-left: 2em">
+            <h1>USD : &nbsp;$<%=usd%></h1>
+            <h1>EUR : &nbsp;€<%=eur%></h1>
+            <h1 style="color:lightseagreen">INR : &nbsp;₹<%=inr%></h1>
         </div>
     </div>
     </div>
-
-    <script>
-        // input = document.getElementById("amount");
-        // input.addEventListener("mousewheel", function(event){ this.blur() });
-
-        $(document).on("wheel", "input[type=number]", function (e) {
-            $(this).blur();
-        });
-    </script>
 </body>
 
-<footer style="background: black; margin-top: 12em; height: 5em; margin-bottom: 0;">
+<footer style="background: black; margin-top: 14em; height: 5em; margin-bottom: 0;">
     <h5 style="color: white; text-align: center; margin: 2em;">Made with ❤️ by <a href="https://github.com/Anantm007"  target="_blank">Anantm007</a> & <a href="https://github.com/Sakshi2k" target="_blank">Sakshi2k</a></h5>
 </footer>
 
