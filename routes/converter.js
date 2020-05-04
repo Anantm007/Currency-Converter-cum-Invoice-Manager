@@ -69,7 +69,8 @@ router.post('/convert', async(req, res) => {
 
         });
     }
-
+    
+    
     else if(fromCurrency === 'INR') // If currency is INR
     {
         toCurrency = 'USD';
@@ -83,10 +84,10 @@ router.post('/convert', async(req, res) => {
 
             convertCurrency(apiKey, amount, query, function(err, total) {
                 eur = total;        
-                return res.render({
+                return res.render("../views/response",{
                     usd: usd.toFixed(2),
-                    inr: Number(amount).toFixed(2),
-                    eur: eur.toFixed(2)
+                    eur: eur.toFixed(2),
+                    inr: Number(amount).toFixed(2)
                 })
         
             });
