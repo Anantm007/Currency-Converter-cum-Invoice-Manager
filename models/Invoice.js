@@ -1,30 +1,31 @@
 const mongoose = require("mongoose");
 
-const invoiceSchema = mongoose.Schema({
+const invoiceSchema = new mongoose.Schema({
     invoiceNumber : {
-        type : string
+        type : String
     }, 
-    invoiceId : {
-        type : string
-    }, 
+
     client : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Client'
-        // (mongoose object, refer above schema)
     },
+
     amount : {
-        type : Number,              // (Number, USD), 
-    }, 
+        type : Number 
+    },
+
     inrReceived : {
         type : Number,
-        default : 0     	        // should be 0 when status is pending)
+        default : 0     	       
     },
+
     status : {
-        type : [String]
-        // enum : { pending, paid, cancelled }
+        type : String,
+        default: 'pending'
     }
-    },
-    { timestamps: true } 
-)
+
+},  { timestamps: true } 
+
+);
 
 module.exports = Invoice = mongoose.model("Invoice", invoiceSchema);
