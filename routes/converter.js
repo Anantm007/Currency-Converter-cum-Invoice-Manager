@@ -7,6 +7,18 @@ require('dotenv').config();
 
 
 
+
+/*************************************             ROUTES               *********************************/
+
+
+// @route   GET / 
+// @desc    Render the homepage
+// @access  Public
+router.get('/', async(req, res) => {
+    return res.render("../views/home")
+})
+
+
 // @route   POST /convert 
 // @desc    Call convert money function and return the converted amounts
 // @access  Public
