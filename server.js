@@ -8,7 +8,6 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 
-
 // Getting data in json format
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -16,7 +15,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 // Setting express engine
 app.set('view engine', 'ejs');
 app.use(express.static("views"));
-
 
 
 //Connecting to the database
