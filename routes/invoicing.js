@@ -32,7 +32,7 @@ router.get('/', async(req, res) => {
 
 
 
-/*************************************      CLIENT ROUTES               *********************************/
+/*************************************       CLIENT ROUTES        *********************************/
 
 
 
@@ -83,16 +83,15 @@ router.post('/', async(req, res) => {
 })
 
 
-
 // @route   GET /invoicing/client/delete/:clientId 
 // @desc    Delete a client using MONGOOSE clientId
 // @access  Public
-router.get('/client/delete/:clientId', async(req, res) => {
+router.post('/client/delete/:clientId', async(req, res) => {
     
     // *this clientId is mongoose generated and not ours
 
     // Check if the client exists or not
-    const client = await Client.findById(req.params.clientId);
+    const client = await Client.findById(req.params.clientId, newDetails);
     if(!client)
     {
         return res.json({
@@ -117,12 +116,85 @@ router.get('/client/delete/:clientId', async(req, res) => {
             message: err
         })
     }
-    
 })
 
+// @route   GET /invoicing/client/edit/:clientId
+// @desc    Update a client using MONGOOSE clientId
+// @access  
+router.post("/client/edit/:clientId",async(req, res) => {
+   const newDetails = req.body.newDetails;
+
+   //updating client with new details.
+   const clientId = await Client.findByIdAndUpdate(req.params.clientId, newDetails, {new: true});
+
+   //check if client exists or not.
+   if(!clientId){
+       return res.json({
+       success : false,
+       message : "Client doesn't exist."
+       });
+   } 
+
+    return res.json({
+        success : true,
+        clientId
+    })
+})
+
+// @route   GET /invoicing/client/findOne/:clientId
+// @desc    Search client using clientId
+// @access  
+router.post("/client/findOne/:clientId", async(req, res) => {
+
+    //Finding client details via client ID
+    // const client = 
+    await Client.findById({_id: req.params.clientId})
+    .then ( client => {
+        //check if client exists or not.
+        if(!client) {
+            return res.json({
+                success : false,
+                message : "Client not found. ! Recheck ID"
+            })
+        }
+
+        return res.json({
+            success: true,
+            client
+        });
+    })
+    .catch(err => {return err;});
+});
 
 
-/*************************************      INVOICE ROUTES               *********************************/
+// @route   GET /invoicing/client/findAll/:clientInfo
+// @desc    Search all clients
+// @access  
+
+// PS: I didnot understand the working of findALL, so just did smth. dekhle ek baar. 
+router.post("/client/findAll/:clientInfo", async(req, res) => {
+
+
+    //Finding client details via client ID
+    const client = await Client.find({_id : req.params.clientInfo});    // YAHAN PROBLEM HAI
+
+    //check if client(s) exist(s) or not.
+    if(!client){
+        return res.json({
+            success : false,
+            message : "Client not found. ! Recheck ID"
+        })
+    }
+
+    return res.json({
+        success: true,
+        client
+    })
+});
+
+
+
+/*************************************      INVOICE ROUTES       *********************************/
 
 
 // ROUTES
