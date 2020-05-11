@@ -174,8 +174,8 @@ router.post("/client/findOne/:clientId", async(req, res) => {
 router.post("/client/findAll", async(req, res) => {
 
     //Finding client details via client ID
-    const clients = await Client.findMany();    // YAHAN PROBLEM HAI ------ AB NAHI HOGI :)
-
+    const clients = await Client.find();    // YAHAN PROBLEM HAI ------ AB NAHI HOGI :)
+    // console.log(clients);
     //check if client(s) exist(s) or not.
     if(!clients){
         return res.json({
