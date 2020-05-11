@@ -120,7 +120,7 @@ router.post('/client/delete/:clientId', async(req, res) => {
 
 // @route   GET /invoicing/client/edit/:clientId
 // @desc    Update a client using MONGOOSE clientId
-// @access  
+// @access  Public
 router.post("/client/edit/:clientId",async(req, res) => {
    const newDetails = req.body.newDetails;
 
@@ -143,7 +143,7 @@ router.post("/client/edit/:clientId",async(req, res) => {
 
 // @route   GET /invoicing/client/findOne/:clientId
 // @desc    Search client using clientId
-// @access  
+// @access  Public
 router.post("/client/findOne/:clientId", async(req, res) => {
 
     //Finding client details via client ID
@@ -167,28 +167,26 @@ router.post("/client/findOne/:clientId", async(req, res) => {
 });
 
 
-// @route   GET /invoicing/client/findAll/:clientInfo
+// @route   GET /invoicing/client/findAll
 // @desc    Search all clients
-// @access  
-
-// PS: I didnot understand the working of findALL, so just did smth. dekhle ek baar. 
-router.post("/client/findAll/:clientInfo", async(req, res) => {
-
+// @access  Public
+// PS: I did not understand the working of findALL, so just did smth. dekhle ek baar. ----- CHILL BABE JUST READ IT ONCE 
+router.post("/client/findAll", async(req, res) => {
 
     //Finding client details via client ID
-    const client = await Client.find({_id : req.params.clientInfo});    // YAHAN PROBLEM HAI
+    const clients = await Client.findMany();    // YAHAN PROBLEM HAI ------ AB NAHI HOGI :)
 
     //check if client(s) exist(s) or not.
-    if(!client){
+    if(!clients){
         return res.json({
             success : false,
-            message : "Client not found. ! Recheck ID"
+            message : "Clients not found"
         })
     }
 
     return res.json({
         success: true,
-        client
+        clients
     })
 });
 
