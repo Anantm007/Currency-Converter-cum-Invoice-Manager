@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const invoiceSchema = new mongoose.Schema({
     invoiceNumber : {
-        type : String
+        type : String,
+        required: true
     }, 
 
     client : {
@@ -11,7 +12,8 @@ const invoiceSchema = new mongoose.Schema({
     },
 
     amount : {
-        type : Number 
+        type : Number,
+        required: true
     },
 
     inrReceived : {
