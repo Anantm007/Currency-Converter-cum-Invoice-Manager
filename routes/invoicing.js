@@ -254,10 +254,10 @@ router.post("/invoice/deleteInvoice", (req, res) => {
     // deleting invoice from Invoices collection.
     Invoice.deleteOne({invoiceNumber: invoiceNumber}, function(err) {
         if(!err){
-            deleted = true;
+            // deleted = true;
             return res.json({
                 success : true,
-                message : "Deleted from database"
+                message : "Deleted from Invoice database"
             })
         } else {
             return res.json ({
