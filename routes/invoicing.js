@@ -286,7 +286,7 @@ router.post("/invoice/deleteInvoice", (req, res) => {
     //             })
     //         }
     //     }
-    })
+    // })
 }) 
 
 
