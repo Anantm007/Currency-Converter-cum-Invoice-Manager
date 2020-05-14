@@ -147,7 +147,6 @@ router.post("/client/edit/:clientId",async(req, res) => {
 router.post("/client/findOne/:clientId", async(req, res) => {
 
     //Finding client details via client ID
-    // const client = 
     await Client.findById({_id: req.params.clientId})
     .then ( client => {
         //check if client exists or not.
@@ -203,14 +202,15 @@ router.post("/client/findAll", async(req, res) => {
 router.post("/invoice/create", async(req, res) => {
     const {invoiceNumber, client, amount} = req.body;
 
-    if(invoiceNumber === "" || client === "" || amount === "" ||
-        !invoiceNumber || !client || !amount) {
+    // Check for empty or undefined fields
+    if(invoiceNumber === "" || client === "" || amount === "" || !invoiceNumber || !client || !amount) {
         return res.json({
             success : false,
             message : "Please enter the required fields"
         })
     }
 
+    // Check that the Invoice is unique
     Invoice.findOne({invoiceNumber : invoiceNumber}, async (err, foundInvoice) => {
         if(!err){
             if(foundInvoice){
@@ -244,7 +244,7 @@ router.post("/invoice/create", async(req, res) => {
 // @access  Public
 router.post("/invoice/deleteInvoice", (req, res) => {
     const invoiceNumber = req.body.invoiceNumber;
-    const deleted = false;
+    // const deleted = false;
     if(invoiceNumber === "" || !invoiceNumber){
         return res.json({
             message : "Enter Invoice number"
@@ -252,7 +252,9 @@ router.post("/invoice/deleteInvoice", (req, res) => {
     }
 
     // deleting invoice from Invoices collection.
-    Invoice.deleteOne({invoiceNumber: invoiceNumber}, function(err) {
+    // Invoice.deleteOne({invoiceNumber: invoiceNumber}, function(err) {
+    Invoice.findOne({invoiceNumber: invoiceNumber}, function(err) {
+
         if(!err){
             // deleted = true;
             return res.json({
@@ -269,24 +271,26 @@ router.post("/invoice/deleteInvoice", (req, res) => {
 
     // deleting invoice from Clients collection
     
-    //------------ Don't even dare look the code below XD. -------  ///
-    
-            // Client.findOne({invoiceNumber: invoiceNumber}, function(err, foundClient) {
-    //     if(!err) {
-    //         if(foundClient) {
-    //             console.log(foundClient);
-    //             return res.json({
-    //                 success : true,
-    //                 message : "Found in Clients",
-    //             })
-    //         }  else {
-    //             return res.json({
-    //                 success : false,
-    //                 message : "Not Found in Clients",
-    //             })
-    //         }
-    //     }
-    // })
+     Invoice.findOne({invoiceNumber: invoiceNumber}, (err, foundInvoice) => {
+        if(!err){
+            if(foundInvoice){
+                const clientOfInvoice = foundInvoice.clientId;
+                console.log (foundInvoice);
+                
+            } else {
+                return res.json({
+                    success : false,
+                    message : "No client found with this invoice."
+                })
+            }
+        } else {
+            return res.json({
+                success : false,
+                Error : err
+            })
+        }
+
+    })
 }) 
 
 
