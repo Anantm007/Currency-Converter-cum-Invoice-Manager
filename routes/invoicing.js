@@ -248,51 +248,32 @@ router.post("/invoice/create", async(req, res) => {
 // @route   POST /invoicing/invoice/deleteInvoice
 // @desc    Delete existing invoice
 // @access  Public
-router.post("/invoice/deleteInvoice", (req, res) => {
-    const invoiceNumber = req.body.invoiceNumber;
-    const deleted = false;
-    if(invoiceNumber === "" || !invoiceNumber){
-        return res.json({
-            message : "Enter Invoice number"
-        })
-    }
-
-    // deleting invoice from Invoices collection.
-    Invoice.deleteOne({invoiceNumber: invoiceNumber}, function(err) {
-        if(!err){
-            // deleted = true;
+router.post("/invoice/deleteInvoice/:invoiceId", async(req, res) => {
+    await Invoice.findByIdAndDelete(req.params.invoiceId, (err) => {
+        if(err) {
             return res.json({
-                success : true,
-                message : "Deleted from Invoice database"
-            })
-        } else {
-            return res.json ({
                 success : false,
                 message : err
             });
         }
-    })
+        
+    } );
 
-    // deleting invoice from Clients collection
+    const invoice = Invoice.findById(req.params.invoiceId).select("client");
+    const clientId = invoice.client;
+    const client = await Client.findById(clientId);
+    var k = 0;
+    client.invoices.forEach(i => {
+        if (i._id ===  req.params.invoiceId) {
+            client.invoices.splice(k,1);
+        }
+        k++;
+    })
+    await client.save();
+    return res.json({
+        success : true
+    })
     
-    //------------ Don't even dare look the code below XD. -------  ///
-    
-            // Client.findOne({invoiceNumber: invoiceNumber}, function(err, foundClient) {
-    //     if(!err) {
-    //         if(foundClient) {
-    //             console.log(foundClient);
-    //             return res.json({
-    //                 success : true,
-    //                 message : "Found in Clients",
-    //             })
-    //         }  else {
-    //             return res.json({
-    //                 success : false,
-    //                 message : "Not Found in Clients",
-    //             })
-    //         }
-    //     }
-    // })
 }) 
 
 
