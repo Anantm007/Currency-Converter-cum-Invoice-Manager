@@ -139,10 +139,10 @@ router.post('/client', async(req, res) => {
 
 
 
-// @route   POST /invoicing/client/edit/:clientId
+// @route   POST /invoicing/client/update/:clientId
 // @desc    Update a client using MONGOOSE clientId
 // @access  Public
-router.post("/client/edit/:clientId",async(req, res) => {
+router.post("/client/update/:clientId",async(req, res) => {
    const newDetails = req.body; // MOMO: this will only be req.body
 
    //updating client with new details.
@@ -203,10 +203,64 @@ router.post('/client/delete/:clientId', async(req, res) => {
 /*************************************      INVOICE ROUTES       *********************************/
 
 
+// @route   GET /invoicing/invoice/findAll
+// @desc    Search all invoices
+// @access  Public
+router.get("/invoice/findAll", async(req, res) => {
+
+    const invoices = await Invoice.find();
+
+    //check if invoice(s) exist(s) or not.
+    if(!invoices){
+        return res.json({
+            success : false,
+            message : "invoices not found"
+        })
+    }
+
+    return res.json({
+        success: true,
+        invoices
+    })
+});
+
+
+
+// @route   GET /invoicing/invoice/:invoiceId
+// @desc    Search invoice using invoiceId
+// @access  Public
+router.get("/invoice/:invoiceId", async(req, res) => {
+
+    //Finding invoice details via invoice ID
+    try {    
+        await Invoice.findById(req.params.invoiceId)
+        .then ( invoice => {
+            //check if invoice exists or not.
+            if(!invoice) {
+                return res.json({
+                    success : false,
+                    message : "invoice not found. ! Recheck ID"
+                })
+            }
+
+            return res.json({
+                success: true,
+                invoice
+            });
+        })   
+    } catch (err) {
+        return res.json({
+            success: false,
+            message: err
+        })
+    }
+});
+
+
 // @route   POST /invoicing/invoice/create
 // @desc    Create a new invoice
 // @access  Public
-router.post("/invoice/create", async(req, res) => {
+router.post("/invoice", async(req, res) => {
     const {invoiceNumber, client, amount} = req.body;
 
     if(invoiceNumber === "" || client === "" || amount === "" ||
@@ -227,28 +281,88 @@ router.post("/invoice/create", async(req, res) => {
             }
 
             try {
-            const invoice = new Invoice(req.body);
-            await invoice.save();
+                let invoice = new Invoice(req.body);
+
+                // Adding invoice to clien't invoice array
+                const client = await Client.findById(req.body.client);
+                client.invoices.unshift(invoice);
+                await client.save();
+
+                // save invoice to the DB
+                await invoice.save();
+
                 return res.json({
                     success : true,
-                    message : "Successfully added",
                     invoice
                 })
             } catch (err) {
-            return res.json({
-                success : false,
-                message : "ERROR : "+ err
-            })
-        }
+                return res.json({
+                    success : false,
+                    message : "ERROR : "+ err
+                })
+              }
         }
     })
 })
 
 
-// @route   POST /invoicing/invoice/deleteInvoice
+
+// @route   POST /invoicing/invoice/update/:invoiceId
+// @desc    Update an invoice
+// @access  Public
+router.post("/invoice/update/:invoiceId", async(req, res) => {
+    
+    try {
+        const invoice = await Invoice.findByIdAndUpdate(req.params.invoiceId, req.body, {new : true});
+        if(!invoice)
+        {
+            return res.json({
+                success: false,
+                message: "Invoice not found"
+            })
+        }
+
+        return res.json({
+            success: true,
+            invoice
+        })   
+    } catch (err) {
+        return res.json({
+            success: false,
+            message: err
+        })
+    }
+});
+
+
+// @route   POST /invoicing/invoice/delete/:invoiceId
 // @desc    Delete existing invoice
 // @access  Public
-router.post("/invoice/deleteInvoice/:invoiceId", async(req, res) => {
+router.post("/invoice/delete/:invoiceId", async(req, res) => {
+
+    // Deleting invoice from clientId
+    const invoice = await Invoice.findById(req.params.invoiceId).select("client");
+    if(!invoice)
+    {
+        return res.json({
+            success: false,
+            message: "Invoice not found"
+        })
+    }
+
+    // cascade delete the invoice from client schema as well
+    const client = await Client.findById(invoice.client);
+    let i = 0;
+    for(i = 0; i < client.invoices.length; i++)
+    {
+        if(JSON.stringify(client.invoices[i]) === JSON.stringify(req.params.invoiceId))
+        {
+            client.invoices.splice(i, 1)
+        }
+    }
+    await client.save();
+
+    // Delete invoice
     await Invoice.findByIdAndDelete(req.params.invoiceId, (err) => {
         if(err) {
             return res.json({
@@ -256,60 +370,15 @@ router.post("/invoice/deleteInvoice/:invoiceId", async(req, res) => {
                 message : err
             });
         }
-        
-    } );
-
-    const invoice = Invoice.findById(req.params.invoiceId).select("client");
-    const clientId = invoice.client;
-    const client = await Client.findById(clientId);
-    var k = 0;
-    client.invoices.forEach(i => {
-        if (i._id ===  req.params.invoiceId) {
-            client.invoices.splice(k,1);
-        }
-        k++;
-    })
-    await client.save();
-    return res.json({
-        success : true
-    })
+        return res.json({
+            success: true,
+            message: "Invoice deleted"
+        })
+    });
     
 }) 
 
 
-// @route   POST /invoicing/invoice/updateStatus
-// @desc    Edit status of an invoice
-// @access  Public
-router.post("/invoice/updateStatus", (req, res) => {
-    const {invoiceNumber, status} = req.body;
-
-    if(invoiceNumber === "" || !invoiceNumber ||status === "" || !status ){
-        return res.json({
-            success : false,
-            message : "Enter all fields"        
-        })        
-    }
-    
-    Invoice.findOne({invoiceNumber : invoiceNumber}, (err, foundInvoice) => {
-        if(!err){
-            if(foundInvoice){
-                foundInvoice.status = status;
-                foundInvoice.save();
-                return res.json({
-                    success : true,
-                    message : "Successfully status updated"
-                });
-            } else {
-                return res.json ({
-                    success : false,
-                    message : "Invoice not found"
-                });
-            }
-        } else {
-            return err
-        }
-    })
-});
 
 //exporting
 module.exports = router;
