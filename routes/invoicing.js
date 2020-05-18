@@ -38,11 +38,11 @@ router.get('/', async(req, res) => {
 // @route   GET /invoicing/client/findAll
 // @desc    Search all clients
 // @access  Public
-// PS: I did not understand the working of findALL, so just did smth. dekhle ek baar. ----- CHILL BABE JUST READ IT ONCE 
+
 router.get("/client/findAll", async(req, res) => {
 
     //Finding client details via client ID
-    const clients = await Client.find();    // YAHAN PROBLEM HAI ------ AB NAHI HOGI :)
+    const clients = await Client.find();    
 
     //check if client(s) exist(s) or not.
     if(!clients){
