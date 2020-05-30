@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
+    <title>Invoice Manager</title>
 
     <!-- Bootstrap-Files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,16 +14,17 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-    <div class="text-center" >
-    <div class="card">
+    <div class="text-center">
         <%- include("partials/header"); -%>
-        <div class="card-body" style="text-align: left; margin-left: 2em">
-            <h1>USD : &nbsp;$<%=usd%></h1>
-            <h1>EUR : &nbsp;€<%=eur%></h1>
-            <h1 style="color:lightseagreen">INR : &nbsp;₹<%=inr%></h1>
-        </div>
+        <h1>Welcome to the invoicing section</h1>
     </div>
-    </div>
+
+    <ul style="margin-top: 5rem;">
+        <li><h4><a href="/invoicing/invoice/findAll">Manage Invoices</a></h4></li>
+        <li><h4><a href="/invoicing/client/findAll">Manage Clients</a></h4></li>
+        <li><h4><a href="/invoicing/summary">Summary</a></h4></li>
+    </ul>
+
 </body>
 
 <%- include("partials/footer"); -%>

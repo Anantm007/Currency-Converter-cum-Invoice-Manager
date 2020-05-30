@@ -16,9 +16,7 @@
 <body>
     <div class="text-center" >
     <div class="card">
-        <div class="card-header">
-            <h1 class="display-4"><a href="/">Currency Converter</a> <strong style="color: red">cum</strong> <a href="/invoicing">Invoice Manager</a></h1>
-        </div>
+        <%- include("partials/header"); -%>
         <div class="card-body">
             <form action="/convert" method="POST">
             <input type="number" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
@@ -41,18 +39,12 @@
     </div>
 
     <script>
-        // input = document.getElementById("amount");
-        // input.addEventListener("mousewheel", function(event){ this.blur() });
-
         $(document).on("wheel", "input[type=number]", function (e) {
             $(this).blur();
         });
     </script>
 </body>
 
-<footer style="background: black; margin-top: 12em; height: 5em; margin-bottom: 0;">
-    <h5 style="color: white; text-align: center; margin: 2em;">Made with ❤️ by <a href="https://github.com/Anantm007"  target="_blank">Anantm007</a> & <a href="https://github.com/Sakshi2k" target="_blank">Sakshi2k</a></h5>
-</footer>
-
+<%- include("partials/footer"); -%>
 
 </html>
