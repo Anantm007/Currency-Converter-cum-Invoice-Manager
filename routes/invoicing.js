@@ -2,7 +2,6 @@ const express = require('express');
 const router = express();
 
 // Utility packages
-const https = require('https');
 require('dotenv').config();
 
 // Models
@@ -24,12 +23,29 @@ router.use(bodyParser.json({type: 'application/json'}));
 // @desc    Home page for invoicing
 // @access  Public
 router.get('/', async(req, res) => {
-    return res.json({
-        success: true,
-        message: "This is the invoicing dashboard, we will add a password page here"
-    })
+    return res.render("../views/invoiceHome")
 })
 
+
+// @route   GET /invoicing/summary
+// @desc    Summary of invoices and clients
+// @access  Public
+router.get('/summary', async(req, res) => {
+
+    let sum = 0;
+
+    const invoices = await Invoice.find( { inrReceived: { $gt: 0 } } );
+    await invoices.forEach(invoice => {
+        sum += invoice.inrReceived
+    })
+
+    return res.json({
+        clients: await Client.countDocuments(),
+        invoicesGenerated: await Invoice.countDocuments(),
+        invoicesPaid: await Invoice.countDocuments() - await Invoice.countDocuments({status: 'pending'}) - await Invoice.countDocuments({status: 'cancelled'}),
+        inrReceived: sum
+    })
+})
 
 
 /*************************************       CLIENT ROUTES        *********************************/
@@ -38,7 +54,6 @@ router.get('/', async(req, res) => {
 // @route   GET /invoicing/client/findAll
 // @desc    Search all clients
 // @access  Public
-
 router.get("/client/findAll", async(req, res) => {
 
     //Finding client details via client ID
