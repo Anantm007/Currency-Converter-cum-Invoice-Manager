@@ -106,6 +106,15 @@ router.get("/client/:clientId", async(req, res) => {
 });
 
 
+
+// @route   GET /invoicing/client/new 
+// @desc    Render page to register a new client
+// @access  Public
+router.get("/client/create/new", async(req, res) => {
+    return res.render("../views/newClient");
+})
+
+
 // @route   POST /invoicing/client 
 // @desc    Register a new client
 // @access  Public
@@ -139,10 +148,8 @@ router.post('/client', async(req, res) => {
         // Save to the database
         await client.save();
         
-        return res.json({
-            success: true,
-            client
-        })
+        return res.redirect("/invoicing/client/findAll");
+
     } catch (err) {
         return res.json({
             success: false,
@@ -181,7 +188,7 @@ router.post("/client/update/:clientId",async(req, res) => {
 // @route   POST /invoicing/client/delete/:clientId 
 // @desc    Delete a client using MONGOOSE clientId
 // @access  Public
-router.post('/client/delete/:clientId', async(req, res) => {
+router.get('/client/delete/:clientId', async(req, res) => {
     
     // *this clientId is mongoose generated and not ours
 
@@ -201,10 +208,8 @@ router.post('/client/delete/:clientId', async(req, res) => {
         // Delete the client
         await Client.findByIdAndDelete(req.params.clientId);
         
-        return res.json({
-            success: true,
-            message: "Client successfully deleted"
-        })
+        return res.redirect("/invoicing/client/findAll");
+
     } catch (err) {
         return res.json({
             success: false,
@@ -224,7 +229,7 @@ router.post('/client/delete/:clientId', async(req, res) => {
 router.get("/invoice/findAll", async(req, res) => {
 
     const invoices = await Invoice.find().populate("client");
-    console.log(invoices)
+
     //check if invoice(s) exist(s) or not.
     if(!invoices){
         return res.json({
@@ -234,7 +239,6 @@ router.get("/invoice/findAll", async(req, res) => {
     }
 
     return res.render("../views/invoices", {
-        success: true,
         invoices
     })
 });
@@ -353,7 +357,7 @@ router.post("/invoice/update/:invoiceId", async(req, res) => {
 // @route   POST /invoicing/invoice/delete/:invoiceId
 // @desc    Delete existing invoice
 // @access  Public
-router.post("/invoice/delete/:invoiceId", async(req, res) => {
+router.get("/invoice/delete/:invoiceId", async(req, res) => {
 
     // Deleting invoice from clientId
     const invoice = await Invoice.findById(req.params.invoiceId).select("client");
@@ -367,16 +371,20 @@ router.post("/invoice/delete/:invoiceId", async(req, res) => {
 
     // cascade delete the invoice from client schema as well
     const client = await Client.findById(invoice.client);
-    let i = 0;
-    for(i = 0; i < client.invoices.length; i++)
-    {
-        if(JSON.stringify(client.invoices[i]) === JSON.stringify(req.params.invoiceId))
-        {
-            client.invoices.splice(i, 1)
-        }
-    }
-    await client.save();
 
+    if(client) 
+    {
+        let i = 0;
+        for(i = 0; i < client.invoices.length; i++)
+        {
+            if(JSON.stringify(client.invoices[i]) === JSON.stringify(req.params.invoiceId))
+            {
+                client.invoices.splice(i, 1)
+            }
+        }
+        await client.save();
+    }
+    
     // Delete invoice
     await Invoice.findByIdAndDelete(req.params.invoiceId, (err) => {
         if(err) {
@@ -385,10 +393,7 @@ router.post("/invoice/delete/:invoiceId", async(req, res) => {
                 message : err
             });
         }
-        return res.json({
-            success: true,
-            message: "Invoice deleted"
-        })
+        return res.redirect("/invoicing/invoice/findAll");
     });
     
 }) 
