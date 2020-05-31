@@ -67,7 +67,7 @@ router.get("/client/findAll", async(req, res) => {
         })
     }
 
-    return res.json({
+    return res.render("../views/clients", {
         success: true,
         clients
     })
@@ -223,8 +223,8 @@ router.post('/client/delete/:clientId', async(req, res) => {
 // @access  Public
 router.get("/invoice/findAll", async(req, res) => {
 
-    const invoices = await Invoice.find();
-
+    const invoices = await Invoice.find().populate("client");
+    console.log(invoices)
     //check if invoice(s) exist(s) or not.
     if(!invoices){
         return res.json({
@@ -233,7 +233,7 @@ router.get("/invoice/findAll", async(req, res) => {
         })
     }
 
-    return res.json({
+    return res.render("../views/invoices", {
         success: true,
         invoices
     })
