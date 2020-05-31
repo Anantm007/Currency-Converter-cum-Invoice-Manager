@@ -4,6 +4,7 @@
   "description": "A nodejs app for currency conversion built using free currencyConverterAPI",
   "main": "server.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon server.js"
   },
   "author": "Anant Mathur",

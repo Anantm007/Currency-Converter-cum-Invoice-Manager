@@ -39,7 +39,7 @@ router.get('/summary', async(req, res) => {
         sum += invoice.inrReceived
     })
 
-    return res.json({
+    return res.render("summary", {
         clients: await Client.countDocuments(),
         invoicesGenerated: await Invoice.countDocuments(),
         invoicesPaid: await Invoice.countDocuments() - await Invoice.countDocuments({status: 'pending'}) - await Invoice.countDocuments({status: 'cancelled'}),
