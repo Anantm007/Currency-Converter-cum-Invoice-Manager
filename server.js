@@ -33,6 +33,6 @@ app.use('/', require('./routes/converter'));
 app.use('/invoicing', require('./routes/invoicing'));
 
 // Start the server and listen to PORT
-app.listen(3000 || process.env.PORT, async(req, res) => {
+app.listen(process.env.PORT || 3000, async(req, res) => {
     console.log(`Server running on PORT ${3000 || process.env.PORT}`)
 })
