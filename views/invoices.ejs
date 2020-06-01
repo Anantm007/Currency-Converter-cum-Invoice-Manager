@@ -21,11 +21,12 @@
                             <h4 class="card-title"><%=invoice.invoiceNumber%> - <%=invoice.client.name%></h4>
                             <p class="card-text"><strong>Amount in USD:</strong> $<%=invoice.amount%> </p>
                             <p class="card-text"><strong>INR Received:</strong> <%=invoice.inrReceived%></p>
+                            <p class="card-text"><strong>Status:</strong> <%=invoice.status%></p>
                         </div>
                         <div class="text-center mb-3">
-                        <button class="btn btn-primary" style="width: 5rem">Edit</button>
-                        <button class="btn btn-danger" style="width: 5rem">Delete</button>
-                    </div>
+                            <button class="btn btn-primary" style="width: 5rem"><a  href="<%=invoice._id%>/update" style="color: white">Edit</a></button>
+                            <button class="btn btn-danger" style="width: 5rem"><a href="delete/<%=invoice._id%>" style="color: white">Delete</a></button>
+                        </div>
                     </div>
                     <br>
                 <% }); %>
