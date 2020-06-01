@@ -1,2 +1,2 @@
 # Currency-Converter
-Currency converter for EUR, USD and INR built using free currencyConverterAPI, Node.js and EJS engine.
+This project consists of 2 parts: Currency converter for EUR, USD and INR (built using free currencyConverterAPI) and Invoice Manager (where we can perform CRUD operations for clients and invoices). This project has a sumarry section for the invoices as well. it can be used by freelancers to keep a record of their clients and invoices in a fool proof manner. The app is built using Node.js
