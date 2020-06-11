@@ -7,6 +7,7 @@ require('dotenv').config();
 // Models
 const Client = require("../models/Client");
 const Invoice = require("../models/Invoice");
+const Note = require("../models/Note");
 
 // Set up body-parser
 const bodyParser = require('body-parser');
@@ -47,6 +48,27 @@ router.get('/summary', async(req, res) => {
     })
 })
 
+// @route   GET /invoicing/notes
+// @desc    Notes
+// @access  Public
+router.get("/notes", async(req, res) => {
+    const note = await Note.findOne({mode: "admin"});
+    return res.render("../views/notes", {
+        note
+    });
+})
+
+
+// @route   POST /invoicing/notes
+// @desc    Notes
+// @access  Public
+router.post("/notes", async(req, res) => {
+    const note = await Note.findOneAndUpdate({mode: "admin"}, req.body, {new: true});
+    
+    return res.render("../views/notes", {
+        note
+    });
+})
 
 /*************************************       CLIENT ROUTES        *********************************/
 
