@@ -376,6 +376,7 @@ router.post("/invoice", async(req, res) => {
                 // Adding invoice to clien't invoice array
                 const client = await Client.findById(req.body.client);
                 client.invoices.unshift(invoice);
+                client.inrReceived += parseInt(req.body.inrReceived);
                 await client.save();
 
                 // save invoice to the DB
@@ -401,6 +402,14 @@ router.post("/invoice", async(req, res) => {
 router.post("/invoice/update/:invoiceId", async(req, res) => {
     
     try {
+        // Updating the client if INR is changed
+        let x = await Invoice.findById(req.params.invoiceId);
+        const client = await Client.findById(x.client);
+        client.inrReceived -= parseInt(x.inrReceived);
+        client.inrReceived += parseInt(req.body.inrReceived);
+        
+        await client.save();
+
         const invoice = await Invoice.findByIdAndUpdate(req.params.invoiceId, req.body, {new : true});
         if(!invoice)
         {
@@ -427,7 +436,7 @@ router.post("/invoice/update/:invoiceId", async(req, res) => {
 router.get("/invoice/delete/:invoiceId", async(req, res) => {
 
     // Deleting invoice from clientId
-    const invoice = await Invoice.findById(req.params.invoiceId).select("client");
+    const invoice = await Invoice.findById(req.params.invoiceId).select("client inrReceived");
     if(!invoice)
     {
         return res.json({
@@ -441,6 +450,8 @@ router.get("/invoice/delete/:invoiceId", async(req, res) => {
 
     if(client) 
     {
+        client.inrReceived -= parseInt(invoice.inrReceived);
+
         let i = 0;
         for(i = 0; i < client.invoices.length; i++)
         {

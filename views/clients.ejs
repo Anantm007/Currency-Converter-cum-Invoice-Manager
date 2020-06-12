@@ -21,6 +21,7 @@
                             <h4 class="card-title"><%=client.clientId%> - <%=client.name%></h4>
                             <p class="card-text"><strong>Company Name:</strong> <%=client.companyName%> </p>
                             <p class="card-text"><strong>Invoices Raised:</strong> <%=client.invoices.length%></p>
+                            <p class="card-text">INR RECEIVED: <strong style="color: #303960;"><%=client.inrReceived%></strong></p>
                         </div>
                         <div class="text-center mb-3">
                         <button class="btn btn-primary" style="width: 5rem"><a  href="<%=client._id%>/update" style="color: white">Edit</a></button>
