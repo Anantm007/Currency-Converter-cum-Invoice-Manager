@@ -7,19 +7,17 @@ require('dotenv').config();
 // Mongoose 
 const mongoose = require('mongoose');
 
-
 // Getting data in json format
 app.use(bodyParser.urlencoded({extended:true}));
-
 
 // Setting express engine
 app.set('view engine', 'ejs');
 app.use(express.static("views"));
 
-
 //Connecting to the database
 mongoose.promise = global.Promise;
 mongoose.connect(process.env.MongoURI,{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true}, (err,db)=> {
+    console.log(MongoURI);
     if(err)
     console.log(err);
 

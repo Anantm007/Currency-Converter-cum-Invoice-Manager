@@ -17,7 +17,7 @@
     <div class="text-center" >
     <div class="card">
         <%- include("partials/header"); -%>
-        <div class="card-body">
+        <div class="card-body" style="margin-bottom: -8pt;">
             <form action="/convert" method="POST">
             <input type="number" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
             <br/><br/>
@@ -34,15 +34,11 @@
             <br/><br/>
             <button class="btn btn-info" type="submit" id="btn-submit">CONVERT</button>
         </form>
+        <br/>
         </div>
     </div>
     </div>
 
-    <script>
-        $(document).on("wheel", "input[type=number]", function (e) {
-            $(this).blur();
-        });
-    </script>
 </body>
 
 <%- include("partials/footer"); -%>
