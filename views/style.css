@@ -32,4 +32,5 @@
 
 .list-group-item :hover{
     background-color: beige;
+    color: #14204e;
 }
