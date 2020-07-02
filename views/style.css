@@ -4,8 +4,9 @@
 }
 
 .card-header{
-    background-color: #26191b;
-    margin-bottom: 15pt;
+    margin-top: -2px;
+    background-color: #070f2e;
+    margin-bottom: 16pt;
 }
 
 .form-control{
@@ -23,9 +24,13 @@
     background-color: white;
 }
 
-
 #btn-submit{
     padding-left: 15px;
     margin-bottom: 15pt;
     padding-right: 20px;
+}
+
+.list-group-item :hover{
+    background-color: beige;
+    color: #14204e;
 }
