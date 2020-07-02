@@ -23,6 +23,12 @@ const clientSchema = new mongoose.Schema({
         ref: 'Invoice'
     }],
 
+    inrReceived: {
+        type: Number,
+        default: 0,
+        required: true
+    }
+
 },  { timestamps: true }
 
 );
