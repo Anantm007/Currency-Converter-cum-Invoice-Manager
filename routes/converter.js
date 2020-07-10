@@ -3,8 +3,8 @@ const router = express();
 
 // Utility packages
 const https = require('https');
+const moment = require('moment-timezone')
 require('dotenv').config();
-
 
 
 
@@ -15,7 +15,21 @@ require('dotenv').config();
 // @desc    Render the homepage
 // @access  Public
 router.get('/', async(req, res) => {
-    return res.render("../views/home")
+   
+    var now = moment().utc();
+    const ist = now.tz("Asia/Kolkata").toString();
+    const gmt = now.tz("Africa/Abidjan").toString();
+    var germanTime = now.tz("Europe/Berlin").toString();
+    var adelaideTime = now.tz("Australia/Adelaide").toString();
+
+    console.log("ist: ", ist, "gmt: ",gmt, "german: ", germanTime, "adelaide: ", adelaideTime)
+    
+    return res.render("../views/home", {
+        ist,
+        gmt,
+        germanTime,
+        adelaideTime
+    })
 })
 
 

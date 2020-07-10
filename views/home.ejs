@@ -15,29 +15,38 @@
 </head>
 <body>
     <div class="text-center" >
-    <div class="card">
-        <%- include("partials/header"); -%>
-        <div class="card-body">
-            <form action="/convert" method="POST">
-            <input type="number" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
-            <br/><br/>
-            From : 
-                <select class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="btn-dropdown"
-                    name="fromCurrency" id="fromCurrency">
-                    USD
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <option class="dropdown-item" value="USD">USD</option>
-                        <option class="dropdown-item" value="EUR">EUR</option>
-                        <option class="dropdown-item" value="INR">INR</option>
-                    </div>            
-                </select>
-            <br/><br/>
-            <button class="btn btn-info" type="submit" id="btn-submit">CONVERT</button>
-        </form>
+        <div class="card">
+            <%- include("partials/header"); -%>
+            <div class="card-body">
+                <form action="/convert" method="POST">
+                    <input type="number" style="width: 10rem" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
+                    <br/><br/>
+                    From : 
+                    <select class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="btn-dropdown"
+                        name="fromCurrency" id="fromCurrency">
+                        USD
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <option class="dropdown-item" value="USD">USD</option>
+                            <option class="dropdown-item" value="EUR">EUR</option>
+                            <option class="dropdown-item" value="INR">INR</option>
+                        </div>            
+                    </select>
+                    <br/><br/>
+                    <button class="btn btn-info" type="submit" id="btn-submit">CONVERT</button>
+                </form>
+            </div>
         </div>
     </div>
+    <div style="margin: 1rem">
+        <h2>Time Zones:</h2>
+        <div style="margin: 1rem">
+        <h4>India: <strong><%=ist.substring(0,23)%></strong></h4>
+        <h4>Germany: <strong><%=germanTime.substring(0,23)%></strong></h4>
+        <h4>GMT: <strong><%=gmt.substring(0,23)%></strong></h4>
+        <h4>Adelaide: <strong><%=adelaideTime.substring(0,23)%></strong></h4>       
     </div>
-
+    </div>
+    
     <script>
         $(document).on("wheel", "input[type=number]", function (e) {
             $(this).blur();
