@@ -15,15 +15,13 @@ require('dotenv').config();
 // @desc    Render the homepage
 // @access  Public
 router.get('/', async(req, res) => {
-   
     var now = moment().utc();
+
     const ist = now.tz("Asia/Kolkata").toString();
     const gmt = now.tz("Africa/Abidjan").toString();
     var germanTime = now.tz("Europe/Berlin").toString();
     var adelaideTime = now.tz("Australia/Adelaide").toString();
-
-    console.log("ist: ", ist, "gmt: ",gmt, "german: ", germanTime, "adelaide: ", adelaideTime)
-    
+        
     return res.render("../views/home", {
         ist,
         gmt,
