@@ -10,13 +10,12 @@
   "author": "Anant Mathur",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
-    "https": "^1.0.0",
     "moment-timezone": "^0.5.31",
-    "mongoose": "^5.9.12",
-    "request": "^2.88.2"
+    "mongoose": "^5.9.12"
   }
 }
