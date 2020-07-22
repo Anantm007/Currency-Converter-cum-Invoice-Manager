@@ -22,6 +22,11 @@ const invoiceSchema = new mongoose.Schema({
         default : 0     	       
     },
 
+    url : {
+        type : String,
+        default: ''
+    },
+
     status : {
         type : String,
         default: 'pending'

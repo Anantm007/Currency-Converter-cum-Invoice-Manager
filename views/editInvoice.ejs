@@ -16,7 +16,7 @@
 <body>
     <div class="text-center">
         <%- include("partials/header"); -%>
-        <h1 class="mt-5 mb-5">Update an existing Invoice</h1>
+        <h1 class="mt-5 mb-5">Update an existing Invoice (<%=invoice.invoiceNumber%>)</h1>
     </div>
 
     <form  action="/invoicing/invoice/update/<%=invoice._id%>"  method="POST" style="margin-bottom: -5rem;" >
@@ -33,6 +33,10 @@
         <div id="div_id_location" class="form-group" style="width: 20rem; margin: auto;">
             <label>INR Received:</label>
             <input class="form-control mb-3" name="inrReceived" value="<%=invoice.inrReceived%>" placeholder="Amount in INR (default is 0)" type="number" /> 
+        </div>
+
+        <div id="div_id_location" class="form-group" style="width: 20rem; margin: auto;">
+            <input class="form-control mb-3" name="url" value="<%=invoice.url%>" placeholder="Invoice URL" type="text" /> 
         </div>
 
         <div id="div_id_location" class="form-group" style="width: 20rem; margin: auto;">
