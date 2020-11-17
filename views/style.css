@@ -1,31 +1,30 @@
-.card{
-    border: none;
-    border-bottom: 1px solid rgb(236, 236, 236);
+.card {
+  border: none;
+  border-bottom: 1px solid rgb(236, 236, 236);
 }
 
-.card-header{
-    background-color: #26191b;
-    margin-bottom: 15pt;
+.card-header {
+  background-color: #26191b;
+  margin-bottom: 15pt;
 }
 
-.form-control{
-    display: inline;
-    width: 15%;
+.form-control {
+  display: inline;
+  width: 15%;
 }
 
-#btn-dropdown{
-    padding: 10px;
-    font-size: 20px;
-    margin-left: 12px;
+#btn-dropdown {
+  padding: 10px;
+  font-size: 20px;
+  margin-left: 12px;
 }
 
-.dropdown-item{
-    background-color: white;
+.dropdown-item {
+  background-color: white;
 }
 
-
-#btn-submit{
-    padding-left: 15px;
-    margin-bottom: 15pt;
-    padding-right: 20px;
+#btn-submit {
+  padding-left: 15px;
+  margin-bottom: 15pt;
+  padding-right: 20px;
 }
