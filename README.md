@@ -2,7 +2,7 @@
 
 This project consists of 2 parts:
 
-1. Currency converter - To inter-convert between EUR, USD and INR built using Foreign exchange rates API, published by the European Central Bank
+1. Currency converter - To inter-convert between EUR, USD and INR built using ExchangeRate-API (https://www.exchangerate-api.com)
 
 2. Invoice/Client Manager - Perform CRUD operations to keep track of clients and generate invoices.
 

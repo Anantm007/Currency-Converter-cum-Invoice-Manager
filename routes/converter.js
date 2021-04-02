@@ -34,16 +34,15 @@ router.get("/", async (req, res) => {
 // @access  Public
 router.post("/convert", async (req, res) => {
   const { amount, fromCurrency } = req.body;
-  const url = `http://api.exchangeratesapi.io/latest?access_key=${EXCHANGE_API_ACCESS_KEY}from=${fromCurrency}`;
+  const url = `https://v6.exchangerate-api.com/v6/${EXCHANGE_API_ACCESS_KEY}/latest/${fromCurrency}`;
   var inr, usd, eur;
 
   if (fromCurrency === "USD") {
     axios
       .get(url)
       .then((data) => {
-        console.log(data.data.rates);
-        inr = data.data.rates.INR * Number(amount);
-        eur = data.data.rates.EUR * Number(amount);
+        inr = data.data.conversion_rates.INR * Number(amount);
+        eur = data.data.conversion_rates.EUR * Number(amount);
         return res.render("../views/response", {
           usd: Number(amount).toFixed(2),
           inr: inr.toFixed(2),
@@ -59,8 +58,8 @@ router.post("/convert", async (req, res) => {
     axios
       .get(url)
       .then((data) => {
-        inr = data.data.rates.INR * Number(amount);
-        usd = data.data.rates.USD * Number(amount);
+        inr = data.data.conversion_rates.INR * Number(amount);
+        usd = data.data.conversion_rates.USD * Number(amount);
         return res.render("../views/response", {
           eur: Number(amount).toFixed(2),
           inr: inr.toFixed(2),
@@ -76,8 +75,8 @@ router.post("/convert", async (req, res) => {
     axios
       .get(url)
       .then((data) => {
-        usd = data.data.rates.USD * Number(amount);
-        eur = data.data.rates.EUR * Number(amount);
+        usd = data.data.conversion_rates.USD * Number(amount);
+        eur = data.data.conversion_rates.EUR * Number(amount);
         return res.render("../views/response", {
           inr: Number(amount).toFixed(2),
           usd: usd.toFixed(2),
