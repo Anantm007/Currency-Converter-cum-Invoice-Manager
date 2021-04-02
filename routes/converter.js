@@ -6,6 +6,8 @@ const axios = require("axios");
 const moment = require("moment-timezone");
 require("dotenv").config();
 
+const { EXCHANGE_API_ACCESS_KEY } = process.env;
+
 /*************************************             ROUTES               *********************************/
 
 // @route   GET /
@@ -32,13 +34,14 @@ router.get("/", async (req, res) => {
 // @access  Public
 router.post("/convert", async (req, res) => {
   const { amount, fromCurrency } = req.body;
-  const url = `https://api.exchangeratesapi.io/latest?base=${fromCurrency}`;
+  const url = `http://api.exchangeratesapi.io/latest?access_key=${EXCHANGE_API_ACCESS_KEY}from=${fromCurrency}`;
   var inr, usd, eur;
 
   if (fromCurrency === "USD") {
     axios
       .get(url)
       .then((data) => {
+        console.log(data.data.rates);
         inr = data.data.rates.INR * Number(amount);
         eur = data.data.rates.EUR * Number(amount);
         return res.render("../views/response", {
