@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
+<html>
 
-    <!-- Bootstrap-Files -->
+<head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -13,20 +8,23 @@
 
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
+
 <body>
-    <div class="text-center" style="margin-bottom: 15px;">
-    <div class="card">
+    <div class="card text-center">
         <%- include("partials/header"); -%>
-        <div class="card-body" style="text-align: left; margin-left: 2em">
-            <h1>USD : &nbsp;$<%=usd%></h1>
-            <h1>EUR : &nbsp;€<%=eur%></h1>
-            <h1 style="color:lightseagreen">INR : &nbsp;₹<%=inr%></h1>
+        <div class="card-body">
+                <h2>Notes</h2>
+                <br/>
+                <form action="/invoicing/notes" method="POST">
+                    <textarea name="data" rows="15" cols="120" required >
+                        <%=note.data%>
+                    </textarea>
+                        <div class="text-center mb-3 mt-3">
+                        <button class="btn btn-primary" style="width: 5rem" type="submit">SUBMIT</button>
+                    </div>
+                </form>
         </div>
     </div>
-    </div>
-    <br/>
 </body>
-
-<%- include("partials/footer"); -%>
 
 </html>

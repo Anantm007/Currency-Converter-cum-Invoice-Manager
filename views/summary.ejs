@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
+    <title>Invoice Manager</title>
 
     <!-- Bootstrap-Files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,30 +14,17 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-    <div class="text-center" >
-    <div class="card">
+    <div class="text-center">
         <%- include("partials/header"); -%>
-        <div class="card-body" style="margin-bottom: -8pt;">
-            <form action="/convert" method="POST">
-            <input type="number" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
-            <br/><br/>
-            From : 
-                <select class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="btn-dropdown"
-                    name="fromCurrency" id="fromCurrency">
-                    USD
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <option class="dropdown-item" value="USD">USD</option>
-                        <option class="dropdown-item" value="EUR">EUR</option>
-                        <option class="dropdown-item" value="INR">INR</option>
-                    </div>            
-                </select>
-            <br/><br/>
-            <button class="btn btn-info" type="submit" id="btn-submit">CONVERT</button>
-        </form>
-        <br/>
-        </div>
+        <h1>Summary of your invoices</h1>
     </div>
-    </div>
+
+    <ul style="margin-top: 2rem;">
+        <li style="margin-bottom: 1rem"><h4>Total Cients: <%=clients%></h4></li>
+        <li style="margin-bottom: 1rem"><h4>Total Invoices: <%=invoicesGenerated%></h4></li>
+        <li style="margin-bottom: 1rem"><h4>Invoices Paid: <%=invoicesPaid%></h4></li>
+        <li><h4>INR received: <%=inrReceived%></h4></li>
+    </ul>
 
 </body>
 

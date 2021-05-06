@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+    <div class="card text-center">
+        <%- include("partials/header"); -%>
+        <div class="card-body">
+                <h2>Client Information</h2>
+                <br/>
+                <%clients.forEach(function(client) { %>
+                    <div class="card" style="background: #d1eaa3; width: 50rem; margin: auto;">
+                        <div class="card-body">
+                            <h4 class="card-title"><%=client.clientId%> - <%=client.name%></h4>
+                            <p class="card-text"><strong>Company Name:</strong> <%=client.companyName%> </p>
+                            <p class="card-text"><strong>Invoices Raised:</strong> <%=client.invoices.length%></p>
+                            <p class="card-text">INR RECEIVED: <strong style="color: #303960;"><%=client.inrReceived%></strong></p>
+                        </div>
+                        <div class="text-center mb-3">
+                        <button class="btn btn-primary" style="width: 5rem"><a  href="<%=client._id%>/update" style="color: white">Edit</a></button>
+                        <button class="btn btn-danger" style="width: 5rem"><a href="delete/<%=client._id%>" style="color: white">Delete</a></button>
+                    </div>
+                    </div>
+                    <br>
+                <% }); %>
+        </div>
+    </div>
+</body>
+
+</html>

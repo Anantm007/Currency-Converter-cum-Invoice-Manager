@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
+    <title>Invoice Manager</title>
 
     <!-- Bootstrap-Files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,31 +14,28 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-    <div class="text-center" >
-    <div class="card">
+    <div class="text-center">
         <%- include("partials/header"); -%>
-        <div class="card-body" style="margin-bottom: -8pt;">
-            <form action="/convert" method="POST">
-            <input type="number" class="form-control" name="amount" id="amount" autocomplete="off" placeholder="Enter Amount"/>
-            <br/><br/>
-            From : 
-                <select class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="btn-dropdown"
-                    name="fromCurrency" id="fromCurrency">
-                    USD
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <option class="dropdown-item" value="USD">USD</option>
-                        <option class="dropdown-item" value="EUR">EUR</option>
-                        <option class="dropdown-item" value="INR">INR</option>
-                    </div>            
-                </select>
-            <br/><br/>
-            <button class="btn btn-info" type="submit" id="btn-submit">CONVERT</button>
-        </form>
-        <br/>
-        </div>
-    </div>
+        <h1>Welcome to the invoicing section</h1>
     </div>
 
+    <div class="container" style="margin-top: 31pt; margin-bottom: -20pt;">
+        <div class="row">
+            <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item"><h4><a href="/invoicing/invoice/findAll">Manage Invoices</a></h4></li>
+                <li class="list-group-item"><h4><a href="/invoicing/client/findAll">Manage Clients</a></h4></li>
+                <li class="list-group-item"><h4><a href="/invoicing/summary">Summary</a></h4></li>
+            </ul>
+            </div>
+            <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item"><h4><a href="/invoicing/client/create/new">Create Client</a></h4></li>
+                <li class="list-group-item"><h4><a href="/invoicing/invoice/create/new">Create Invoice</a></h4></li>
+            </ul>
+            </div>
+        </div>
+    </div>
 </body>
 
 <%- include("partials/footer"); -%>
