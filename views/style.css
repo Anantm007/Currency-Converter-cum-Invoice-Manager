@@ -28,3 +28,14 @@
   margin-bottom: 15pt;
   padding-right: 20px;
 }
+
+.time-zone-table,
+#tz-heading {
+  max-width: 24rem;
+  margin: 0 2rem;
+  /* display: none; */
+}
+
+#tz-heading {
+  margin: 1rem 10rem;
+}

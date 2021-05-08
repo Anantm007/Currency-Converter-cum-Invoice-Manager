@@ -45,7 +45,7 @@
               autocomplete="off"
               placeholder="Enter Amount"
             />
-            <br /><br />
+            <br />
             From :
             <select
               class="btn btn-light dropdown-toggle"
@@ -61,7 +61,7 @@
                 <option class="dropdown-item" value="INR">INR</option>
               </div>
             </select>
-            <br /><br />
+            <br />
             <button class="btn btn-info" type="submit" id="btn-submit">
               CONVERT
             </button>
@@ -69,20 +69,42 @@
         </div>
       </div>
     </div>
-    <div style="margin: 1rem; margin-bottom: -12rem">
-      <h2>Time Zones:</h2>
+    <table class="table time-zone-table table-dark">
+      <tbody>
+        <h4 id='tz-heading'>Time Zones</h4>
+        <tr>
+          <th scope="row">India</th>
+          <td><%=ist.substring(0,23)%></td>
+        </tr>
+        <tr>
+          <th scope="row">Germany</th>
+          <td><%=germanTime.substring(0,23)%></td>
+        </tr>
+        <tr>
+          <th scope="row">GMT</th>
+          <td><%=gmt.substring(0,23)%></td>
+        </tr>
+        <tr>
+          <th scope="row">Adelaide</th>
+          <td><%=adelaideTime.substring(0,23)%></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div style="margin: 1rem; margin-bottom: -12rem">
+      <h6>Time Zones:</h6>
       <div style="margin: 1rem">
-        <h4>India: <strong><%=ist.substring(0,23)%></strong></h4>
-        <h4>Germany: <strong><%=germanTime.substring(0,23)%></strong></h4>
-        <h4>GMT: <strong><%=gmt.substring(0,23)%></strong></h4>
-        <h4>Adelaide: <strong><%=adelaideTime.substring(0,23)%></strong></h4>
+        <p>India: <strong><%=ist.substring(0,23)%></strong></p>
+        <p>Germany: <strong><%=germanTime.substring(0,23)%></strong></p>
+        <p>GMT: <strong><%=gmt.substring(0,23)%></strong></p>
+        <p>Adelaide: <strong><%=adelaideTime.substring(0,23)%></strong></p>
       </div>
-    </div>
+    </div> -->
 
     <script>
       $(document).on("wheel", "input[type=number]", function (e) {
         $(this).blur();
       });
+
     </script>
   </body>
 
