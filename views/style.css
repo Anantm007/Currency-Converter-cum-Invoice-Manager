@@ -44,6 +44,13 @@
   margin: 0 2rem;
 }
 
+@media only screen and (max-width: 600px) {
+  .time-zone-table {
+    max-width: 24rem;
+    margin: 0 auto;
+  }
+}
+
 #tz-heading,
 .card {
   margin: 1rem 10rem;
