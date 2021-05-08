@@ -1,14 +1,25 @@
 .card {
   /* border: none; */
-  padding: 2rem;
   text-align: center;
-  /* border-bottom: 1px solid rgb(236, 236, 236); */
+  border: 1px solid rgb(236, 236, 236);
 }
 
 .card-header {
-  background-color: #26191b;
+  /* background-color: #26191b; */
   text-align: center;
-  margin-bottom: 15pt;
+  border: none;
+  /* background-color: white; */
+  color: whitesmoke;
+  /* margin-bottom: 16pt; */
+  background-color: #070f2e;
+}
+
+.dark {
+  background-color: #212529;
+}
+
+h4 {
+  text-align: center;
 }
 
 .form-control {
@@ -17,30 +28,29 @@
 }
 
 .row {
-  margin: 0;
-  /* background: brown; */
-  padding: 1rem;
-}
-
-#btn-dropdown {
-  padding: 10px;
-  font-size: 20px;
-  margin-left: 12px;
+  margin: 4rem;
+  margin-bottom: 4.9em;
 }
 
 .dropdown-item {
   background-color: white;
 }
 
-/* #btn-submit {
+.list-group-item {
+  font-size: 13pt;
+  max-width: 15rem;
+  margin: 0 4rem;
+}
+
+#btn-submit {
   padding-left: 15px;
   margin-bottom: 15pt;
   padding-right: 20px;
-} */
+}
 
 .time-zone-table,
 #tz-heading {
-  max-width: 24rem;
+  max-width: 20rem;
   margin: 0 2rem;
 }
 
@@ -49,9 +59,16 @@
     max-width: 24rem;
     margin: 0 auto;
   }
+
+  .list-group-item {
+    margin: 0rem;
+  }
+
+  .col-sm-12 {
+    margin-bottom: 1.5rem;
+  }
 }
 
-#tz-heading,
-.card {
+/* #tz-heading{
   margin: 1rem 10rem;
-}
+} */

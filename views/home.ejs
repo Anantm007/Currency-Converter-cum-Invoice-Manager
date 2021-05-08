@@ -33,9 +33,10 @@
   <body>
     <%- include("partials/header"); -%>
     <div class="row">
-      <div class="col-xl-6 col-lg-6 col-sm-12">
+      <div class="col-xl-4 col-lg-4 col-sm-12">
+        <h4>Convert Currency</h4>
+        <br/>
         <div class="card">
-          <h4>Convert Currency</h4>
         <div class="card-body">
           <form action="/convert" method="POST">
             <input
@@ -72,10 +73,11 @@
         </div>
       </div>
     
-      <div class="col-xl-6 col-lg-6">
+      <div class="col-xl-4 col-lg-4 col-sm-12">
         <table class="table time-zone-table table-dark">
-          <tbody>
-            <h4 id='tz-heading'>Time Zones</h4>
+          <h4 id='tz-heading'>Time Zones</h4>
+          <br/>
+          <tbody style="text-align: center;">
             <tr>
               <th scope="row">India</th>
               <td><%=ist.substring(0,23)%></td>
@@ -95,6 +97,18 @@
           </tbody>
         </table>
       </div>
+
+      <div class="col-xl-4 col-lg-4 col-sm-12">
+        <h4>Invoicing</h4>
+        <ul class="list-group" style="text-align: center;">
+          <li class="list-group-item"><a href="/invoicing/invoice/findAll">Manage Invoices</a></li>
+          <li class="list-group-item"><a href="/invoicing/client/findAll">Manage Clients</a></li>
+          <li class="list-group-item"><a href="/invoicing/summary">Summary</a></li>
+          <li class="list-group-item"><a href="/invoicing/client/create/new">Create Client</a></li>
+          <li class="list-group-item"><a href="/invoicing/invoice/create/new">Create Invoice</a></li>
+      </ul>
+      </div>
+
     </div>
 
     <script>
