@@ -33,7 +33,13 @@
 #tz-heading {
   max-width: 24rem;
   margin: 0 2rem;
-  /* display: none; */
+}
+
+@media only screen and (max-width: 600px) {
+  .time-zone-table {
+    max-width: 24rem;
+    margin: 0 auto;
+  }
 }
 
 #tz-heading {
