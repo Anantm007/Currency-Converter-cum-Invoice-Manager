@@ -1,16 +1,25 @@
 .card {
-  border: none;
-  border-bottom: 1px solid rgb(236, 236, 236);
+  /* border: none; */
+  padding: 2rem;
+  text-align: center;
+  /* border-bottom: 1px solid rgb(236, 236, 236); */
 }
 
 .card-header {
   background-color: #26191b;
+  text-align: center;
   margin-bottom: 15pt;
 }
 
 .form-control {
   display: inline;
   width: 15%;
+}
+
+.row {
+  margin: 0;
+  /* background: brown; */
+  padding: 1rem;
 }
 
 #btn-dropdown {
@@ -23,19 +32,19 @@
   background-color: white;
 }
 
-#btn-submit {
+/* #btn-submit {
   padding-left: 15px;
   margin-bottom: 15pt;
   padding-right: 20px;
-}
+} */
 
 .time-zone-table,
 #tz-heading {
   max-width: 24rem;
   margin: 0 2rem;
-  /* display: none; */
 }
 
-#tz-heading {
+#tz-heading,
+.card {
   margin: 1rem 10rem;
 }

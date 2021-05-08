@@ -27,15 +27,13 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+
     <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
-  
   <body>
-    <%- include("partials/header"); -%>
-    <div class="row">
-      <div class="col-xl-6 col-lg-6 col-sm-12">
-        <div class="card">
-          <h4>Convert Currency</h4>
+    <div class="text-center">
+      <div class="card">
+        <%- include("partials/header"); -%>
         <div class="card-body">
           <form action="/convert" method="POST">
             <input
@@ -69,39 +67,46 @@
             </button>
           </form>
         </div>
-        </div>
-      </div>
-    
-      <div class="col-xl-6 col-lg-6">
-        <table class="table time-zone-table table-dark">
-          <tbody>
-            <h4 id='tz-heading'>Time Zones</h4>
-            <tr>
-              <th scope="row">India</th>
-              <td><%=ist.substring(0,23)%></td>
-            </tr>
-            <tr>
-              <th scope="row">Germany</th>
-              <td><%=germanTime.substring(0,23)%></td>
-            </tr>
-            <tr>
-              <th scope="row">GMT</th>
-              <td><%=gmt.substring(0,23)%></td>
-            </tr>
-            <tr>
-              <th scope="row">Adelaide</th>
-              <td><%=adelaideTime.substring(0,23)%></td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
+    <table class="table time-zone-table table-dark">
+      <tbody>
+        <h4 id='tz-heading'>Time Zones</h4>
+        <tr>
+          <th scope="row">India</th>
+          <td><%=ist.substring(0,23)%></td>
+        </tr>
+        <tr>
+          <th scope="row">Germany</th>
+          <td><%=germanTime.substring(0,23)%></td>
+        </tr>
+        <tr>
+          <th scope="row">GMT</th>
+          <td><%=gmt.substring(0,23)%></td>
+        </tr>
+        <tr>
+          <th scope="row">Adelaide</th>
+          <td><%=adelaideTime.substring(0,23)%></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div style="margin: 1rem; margin-bottom: -12rem">
+      <h6>Time Zones:</h6>
+      <div style="margin: 1rem">
+        <p>India: <strong><%=ist.substring(0,23)%></strong></p>
+        <p>Germany: <strong><%=germanTime.substring(0,23)%></strong></p>
+        <p>GMT: <strong><%=gmt.substring(0,23)%></strong></p>
+        <p>Adelaide: <strong><%=adelaideTime.substring(0,23)%></strong></p>
+      </div>
+    </div> -->
 
-    <script>
+    <scri>
       $(document).on("wheel", "input[type=number]", function (e) {
         $(this).blur();
       });
-    </script>
+
+      $()
+    </scri>
   </body>
 
   <%- include("partials/footer"); -%>
