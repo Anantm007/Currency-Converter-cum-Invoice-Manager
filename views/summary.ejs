@@ -31,13 +31,13 @@
     <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
   <body>
-    <div class="text-center">
+    <div class="text-center" style="background-color: #070f2e">
       <%- include("partials/header"); -%>
-      <h1>Summary of your invoices</h1>
     </div>
+    <h1 class="text-center m-5">Summary of your invoices</h1>
 
     <ul style="margin-top: 2rem">
-      <li style="margin-bottom: 1rem"><h4>Total Cients: <%=clients%></h4></li>
+      <li style="margin-bottom: 1rem"><h4>Total Clients: <%=clients%></h4></li>
       <li style="margin-bottom: 1rem">
         <h4>Total Invoices: <%=invoicesGenerated%></h4>
       </li>

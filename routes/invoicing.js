@@ -103,7 +103,7 @@ router.get("/client/findAll", async (req, res) => {
     const clients = await Client.find().sort("clientId");
 
     //check if client(s) exist(s) or not.
-    if (!clients) {
+    if (!clients || clients.length === 0) {
       return res.json({
         success: false,
         message: "Clients not found",
@@ -113,32 +113,6 @@ router.get("/client/findAll", async (req, res) => {
     return res.render("../views/clients", {
       success: true,
       clients,
-    });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json(error);
-  }
-});
-
-// @route   GET /invoicing/client/:clientId
-// @desc    Search client using clientId
-// @access  Public
-router.get("/client/:clientId", async (req, res) => {
-  //Finding client details via client ID
-  try {
-    await Client.findById(req.params.clientId).then((client) => {
-      //check if client exists or not.
-      if (!client) {
-        return res.json({
-          success: false,
-          message: "Client not found. ! Recheck ID",
-        });
-      }
-
-      return res.json({
-        success: true,
-        client,
-      });
     });
   } catch (error) {
     console.log(error);
@@ -275,6 +249,32 @@ router.get("/client/delete/:clientId", async (req, res) => {
   }
 });
 
+// @route   GET /invoicing/client/:clientId
+// @desc    Search client using clientId
+// @access  Public
+router.get("/client/:clientId", async (req, res) => {
+  //Finding client details via client ID
+  try {
+    await Client.findById(req.params.clientId).then((client) => {
+      //check if client exists or not.
+      if (!client) {
+        return res.json({
+          success: false,
+          message: "Client not found. ! Recheck ID",
+        });
+      }
+
+      return res.json({
+        success: true,
+        client,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
 /*************************************      INVOICE ROUTES       *********************************/
 
 // @route   GET /invoicing/invoice/findAll
@@ -287,8 +287,8 @@ router.get("/invoice/findAll", async (req, res) => {
       .sort("-invoiceNumber");
 
     //check if invoice(s) exist(s) or not.
-    if (!invoices) {
-      return res.json({
+    if (!invoices || invoices.length === 0) {
+      return res.status(404).json({
         success: false,
         message: "invoices not found",
       });
@@ -296,32 +296,6 @@ router.get("/invoice/findAll", async (req, res) => {
 
     return res.render("../views/invoices", {
       invoices,
-    });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json(error);
-  }
-});
-
-// @route   GET /invoicing/invoice/:invoiceId
-// @desc    Search invoice using invoiceId
-// @access  Public
-router.get("/invoice/:invoiceId", async (req, res) => {
-  try {
-    //Finding invoice details via invoice ID
-    await Invoice.findById(req.params.invoiceId).then((invoice) => {
-      //check if invoice exists or not.
-      if (!invoice) {
-        return res.json({
-          success: false,
-          message: "invoice not found. ! Recheck ID",
-        });
-      }
-
-      return res.json({
-        success: true,
-        invoice,
-      });
     });
   } catch (error) {
     console.log(error);
@@ -498,6 +472,32 @@ router.get("/invoice/delete/:invoiceId", async (req, res) => {
         });
       }
       return res.redirect("/invoicing/invoice/findAll");
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
+// @route   GET /invoicing/invoice/:invoiceId
+// @desc    Search invoice using invoiceId
+// @access  Public
+router.get("/invoice/:invoiceId", async (req, res) => {
+  try {
+    //Finding invoice details via invoice ID
+    await Invoice.findById(req.params.invoiceId).then((invoice) => {
+      //check if invoice exists or not.
+      if (!invoice) {
+        return res.json({
+          success: false,
+          message: "invoice not found. ! Recheck ID",
+        });
+      }
+
+      return res.json({
+        success: true,
+        invoice,
+      });
     });
   } catch (error) {
     console.log(error);
