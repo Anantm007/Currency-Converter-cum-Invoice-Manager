@@ -45,6 +45,9 @@ The code is very scalable and anyone who wishes to modify the app as per their r
 
 1. https://exchangeratesapi.io/
 
-#### Contributiong
+#### Contribution
 
 Feel free to fork this repo and raise an issue or submit a PR in case of any bugs.
+
+
+### Version 1.0
