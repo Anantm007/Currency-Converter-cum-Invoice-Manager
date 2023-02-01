@@ -16,6 +16,6 @@
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "moment-timezone": "^0.5.31",
-    "mongoose": "^5.9.12"
+    "mongoose": "^5.13.15"
   }
 }
